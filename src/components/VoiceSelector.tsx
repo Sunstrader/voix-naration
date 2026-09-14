@@ -19,7 +19,7 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
       <div className="flex items-center justify-between">
         <label className="text-xs font-semibold uppercase tracking-wider text-amber-400/90 flex items-center gap-1.5 font-mono">
           <Mic className="w-3.5 h-3.5 text-amber-400" />
-          Voix du Narrateur (Modèle Gemini TTS)
+          Choisissez une voix
         </label>
         <span className="text-[11px] text-neutral-400">{VOICE_OPTIONS.length} voix disponibles</span>
       </div>

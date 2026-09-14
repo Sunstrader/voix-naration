@@ -1,6 +1,8 @@
 {
-  "name": "Narration Fantasy Audio",
-  "description": "Lecture immersive de livre audio de fantasy en français avec Gemini TTS",
+  "name": "Atelier vocal",
+  "description": "Convertissez votre texte en audio avec 30 voix et un ton personnalisable.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

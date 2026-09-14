@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import { GoogleGenAI, Modality } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 
+import { DEFAULT_TTS_DIRECTIVES } from "./src/constants";
 import { VOICE_OPTIONS } from './src/voices';
 
 dotenv.config();
@@ -87,11 +88,12 @@ async function startServer() {
         return res.status(400).json({ error: "Le texte à lire est obligatoire." });
       }
 
-      const defaultInstructions =
-        "Lis ce texte en français de France, comme une narration de livre audio de fantasy. " +
-        "Voix naturelle, posée et immersive. Débit légèrement lent, pauses souples entre les phrases, émotion retenue. " +
-        "Évite le ton publicitaire et la diction mécanique. Dans les dialogues, adapte subtilement l’intention du personnage. " +
-        "Respecte exactement le texte. Voix seule, sans musique ni bruitage.";
+      if (text.length > 12000 || (customInstructions != null && (typeof customInstructions !== "string" || customInstructions.length > 6000))) {
+        return res.status(400).json({ error: "Texte ou consignes trop longs ou invalides." });
+      }
+      res.setHeader("Cache-Control", "no-store");
+
+      const defaultInstructions = DEFAULT_TTS_DIRECTIVES;
 
       const promptInstructions = customInstructions && customInstructions.trim()
         ? customInstructions.trim()
@@ -126,10 +128,9 @@ async function startServer() {
       );
 
       if (!audioPart || !audioPart.inlineData?.data) {
-        console.error("No audio part found in response:", JSON.stringify(response, null, 2));
+        console.error("TTS: no audio returned.");
         return res.status(502).json({
           error: "Aucun flux audio retourné par le modèle Gemini TTS.",
-          details: response.text || "Réponse vide",
         });
       }
 
@@ -148,8 +149,8 @@ async function startServer() {
         durationEstimateSeconds: Math.round(estimatedDuration * 10) / 10,
       });
     } catch (err: unknown) {
-      console.error("TTS generation error:", err);
-      const message = err instanceof Error ? err.message : "Erreur inconnue lors de la génération audio.";
+      console.error("TTS generation failed.");
+      const message = "La génération audio a échoué. Vérifiez la configuration du service ou réessayez.";
       res.status(500).json({
         error: message,
       });

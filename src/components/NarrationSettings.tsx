@@ -21,11 +21,11 @@ export const NarrationSettings: React.FC<NarrationSettingsProps> = ({
 
   const presetThemes = [
     {
-      name: 'Livre Audio Fantasy (Par défaut)',
+      name: 'Naturel (par défaut)',
       prompt: DEFAULT_TTS_DIRECTIVES,
     },
     {
-      name: 'Givre & Silence Mystique',
+      name: 'Mystérieux',
       prompt:
         MYSTIC_TTS_DIRECTIVES,
     },
@@ -49,9 +49,9 @@ export const NarrationSettings: React.FC<NarrationSettingsProps> = ({
           </div>
           <div>
             <div className="text-xs font-semibold text-neutral-200 group-hover:text-amber-300 transition flex items-center gap-2">
-              <span>Directives Narratives & Consignes de Voix</span>
+              <span>Ton et consignes de lecture</span>
               <span className="text-[10px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400 font-mono">
-                Prompt TTS
+                Personnalisable
               </span>
             </div>
             <p className="text-[11px] text-neutral-400 line-clamp-1">

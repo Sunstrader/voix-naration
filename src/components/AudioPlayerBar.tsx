@@ -147,7 +147,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
     if (!audioUrl) return;
     const a = document.createElement('a');
     a.href = audioUrl;
-    a.download = `narration-fantasy-${voiceName.toLowerCase()}-${Date.now()}.wav`;
+    a.download = `narration-${voiceName.toLowerCase()}-${Date.now()}.wav`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
