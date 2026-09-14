@@ -1,7 +1,6 @@
 export interface VoiceOption {
   id: string;
   name: string;
-  gender: 'male' | 'female';
   tone: string;
   description: string;
 }

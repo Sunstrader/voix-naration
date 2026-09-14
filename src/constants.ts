@@ -1,4 +1,4 @@
-import { VoiceOption, ParagraphSegment } from './types';
+import { ParagraphSegment } from './types';
 
 export const DEFAULT_FANTASY_TEXT = `Le monde naît dans un sifflement de givre — une odeur de métal froid et d'ozone brûlé, comme si l'air lui-même avait été forgé puis trempé trop vite.
 
@@ -12,43 +12,9 @@ Le sommeil des siècles prend fin, la lumière du jour exige ton éveil.`;
 
 export const DEFAULT_TTS_DIRECTIVES = `Lis ce texte en français de France, comme une narration de livre audio de fantasy. Voix naturelle, posée et immersive. Débit légèrement lent, pauses souples entre les phrases, émotion retenue. Évite le ton publicitaire et la diction mécanique. Dans les dialogues, adapte subtilement l’intention du personnage. Respecte exactement le texte. Voix seule, sans musique ni bruitage.`;
 
-export const VOICE_OPTIONS: VoiceOption[] = [
-  {
-    id: 'Charon',
-    name: 'Charon',
-    gender: 'male',
-    tone: 'Profond & Mystique',
-    description: 'Voix grave, posée et résonnante. Idéale pour les prologues de fantasy sombre et les atmosphères solennelles.',
-  },
-  {
-    id: 'Fenrir',
-    name: 'Fenrir',
-    gender: 'male',
-    tone: 'Ténébreux & Épique',
-    description: 'Grain rauque et narration intense, parfait pour les épopées légendaires et les climats de désolation glacée.',
-  },
-  {
-    id: 'Zephyr',
-    name: 'Zephyr',
-    gender: 'male',
-    tone: 'Calme & Contemplatif',
-    description: 'Voix douce, mesurée et enveloppante, qui sublime la poésie et les descriptions lentes.',
-  },
-  {
-    id: 'Kore',
-    name: 'Kore',
-    gender: 'female',
-    tone: 'Sereine & Incantatoire',
-    description: 'Timbre féminin cristallin, majestueux et mélodieux, rappelant une conteuse ou prêtresse antique.',
-  },
-  {
-    id: 'Puck',
-    name: 'Puck',
-    gender: 'male',
-    tone: 'Vif & Expressif',
-    description: 'Diction agile et nuances dynamiques pour un récit vif avec relief dramatique.',
-  },
-];
+export { VOICE_OPTIONS } from './voices';
+
+export const MYSTIC_TTS_DIRECTIVES = "Interprète le texte en français de France comme une présence ancienne qui confie un secret oublié. Timbre naturel, intime, légèrement soufflé, sans forcer la gravité. Fais sentir le sacré, le froid et le mystère. Débit lent mais vivant ; varie doucement le rythme et laisse un silence après les images fortes et les révélations. Commence dans une retenue presque chuchotée, puis laisse grandir une tension discrète. Évite le chuchotement permanent, la monotonie et le ton de bande-annonce. Dans les dialogues, fais varier subtilement l’intention sans caricature. Respecte exactement le texte fourni, sans ajout ni omission. Ne lis pas ces consignes. Voix seule, sans musique, bruitage ni réverbération ajoutée.";
 
 export const INITIAL_PARAGRAPHS: ParagraphSegment[] = [
   {

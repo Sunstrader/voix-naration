@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import { GoogleGenAI, Modality } from "@google/genai";
 import { createServer as createViteServer } from "vite";
 
+import { VOICE_OPTIONS } from './src/voices';
+
 dotenv.config();
 
 function pcmToWav(pcmBuffer: Buffer, sampleRate = 24000, numChannels = 1, bitDepth = 16): Buffer {
@@ -98,7 +100,7 @@ async function startServer() {
       const prompt = `${promptInstructions}\n\nTexte :\n${text.trim()}`;
 
       const ai = getAi();
-      const validVoices = ["Charon", "Fenrir", "Zephyr", "Kore", "Puck"];
+      const validVoices = VOICE_OPTIONS.map((voice) => voice.id);
       const selectedVoice = validVoices.includes(voiceName) ? voiceName : "Charon";
 
       const response = await ai.models.generateContent({
