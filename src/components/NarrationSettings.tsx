@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Sliders, RotateCcw, ChevronDown, ChevronUp, Sparkles, ShieldCheck } from 'lucide-react';
-import { DEFAULT_TTS_DIRECTIVES } from '../constants';
+import { DEFAULT_TTS_DIRECTIVES, MYSTIC_TTS_DIRECTIVES } from '../constants';
 
 interface NarrationSettingsProps {
   directives: string;
@@ -13,7 +13,7 @@ export const NarrationSettings: React.FC<NarrationSettingsProps> = ({
   onChangeDirectives,
   disabled = false,
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
 
   const resetToDefault = () => {
     onChangeDirectives(DEFAULT_TTS_DIRECTIVES);
@@ -27,7 +27,7 @@ export const NarrationSettings: React.FC<NarrationSettingsProps> = ({
     {
       name: 'Givre & Silence Mystique',
       prompt:
-        'Lis ce texte en français avec une diction lente, très feutrée et murmurée, comme une incantation murmurée dans une cathédrale de glace. Pauses profondes entre les phrases. Voix seule sans musique.',
+        MYSTIC_TTS_DIRECTIVES,
     },
     {
       name: 'Épique & Tragique',

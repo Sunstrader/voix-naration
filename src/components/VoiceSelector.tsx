@@ -21,7 +21,7 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
           <Mic className="w-3.5 h-3.5 text-amber-400" />
           Voix du Narrateur (Modèle Gemini TTS)
         </label>
-        <span className="text-[11px] text-neutral-400">5 voix disponibles</span>
+        <span className="text-[11px] text-neutral-400">{VOICE_OPTIONS.length} voix disponibles</span>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
@@ -54,7 +54,7 @@ export const VoiceSelector: React.FC<VoiceSelectorProps> = ({
                     </span>
                   ) : (
                     <span className="text-[10px] text-neutral-500 uppercase tracking-wider">
-                      {voice.gender === 'male' ? 'M' : 'F'}
+                      Voix
                     </span>
                   )}
                 </div>

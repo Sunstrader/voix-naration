@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import {
   DEFAULT_FANTASY_TEXT,
-  DEFAULT_TTS_DIRECTIVES,
+  MYSTIC_TTS_DIRECTIVES,
   VOICE_OPTIONS,
 } from './constants';
 import { VoiceSelector } from './components/VoiceSelector';
@@ -22,8 +22,8 @@ import { NarrationSettings } from './components/NarrationSettings';
 
 export default function App() {
   const [text, setText] = useState(DEFAULT_FANTASY_TEXT);
-  const [directives, setDirectives] = useState(DEFAULT_TTS_DIRECTIVES);
-  const [selectedVoiceId, setSelectedVoiceId] = useState('Charon');
+  const [directives, setDirectives] = useState(MYSTIC_TTS_DIRECTIVES);
+  const [selectedVoiceId, setSelectedVoiceId] = useState('Enceladus');
   const [isEditingText, setIsEditingText] = useState(false);
 
   // Audio generation state
@@ -147,11 +147,7 @@ export default function App() {
     }
   };
 
-  // Auto-generate narration on initial mount
-  useEffect(() => {
-    generateNarration(DEFAULT_FANTASY_TEXT, 'Charon');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Génération manuelle : choisir le timbre et le ton avant le premier appel.
 
   // Switch voice & update audio if already cached
   const handleSelectVoice = (voiceId: string) => {
@@ -160,6 +156,9 @@ export default function App() {
     if (audioCache[cacheKey]) {
       setAudioUrl(audioCache[cacheKey].audioUrl);
       setDurationEstimate(audioCache[cacheKey].duration);
+    } else {
+      setAudioUrl(null);
+      setDurationEstimate(0);
     }
   };
 
@@ -252,7 +251,7 @@ export default function App() {
                 </div>
                 <div className="text-[11px] text-neutral-400">
                   Voix sélectionnée :{' '}
-                  <span className="text-amber-400 font-semibold">{selectedVoiceId}</span> • 129 mots
+                  <span className="text-amber-400 font-semibold">{selectedVoiceId}</span> • {text.trim() ? text.trim().split(/\s+/).length : 0} mots
                 </div>
               </div>
             </div>
@@ -297,6 +296,7 @@ export default function App() {
             directives={directives}
             onChangeDirectives={(newDirectives) => {
               setDirectives(newDirectives);
+              setAudioUrl(null);
             }}
             disabled={isLoading}
           />
@@ -311,7 +311,7 @@ export default function App() {
             isEditing={isEditingText}
             onToggleEdit={() => setIsEditingText(!isEditingText)}
             rawText={text}
-            onTextChange={setText}
+            onTextChange={(value) => { setText(value); setAudioUrl(null); }}
             isLoading={isLoading}
           />
         </section>
